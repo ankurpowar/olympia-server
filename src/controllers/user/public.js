@@ -1,4 +1,7 @@
+
+
 async function handleCareerApplication(request, reply){
+    console.log(request.body)
     return reply.code(200).send({message:'success'})
 }
 
