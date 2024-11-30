@@ -11,8 +11,7 @@ async function publicRoutes(instance, options){
     })
 
     
-
-    instance.post('/career-application', handleCareerApplication)
+    instance.post('/career-applications', handleCareerApplication)
 
     
 }
