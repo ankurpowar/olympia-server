@@ -1,4 +1,4 @@
-import { handleCareerApplication } from "../../controllers/user/public.js";
+import { handleCareerApplication, handleContactUs } from "../../controllers/user/public.js";
 import multer from 'fastify-multer'
 const upload = multer({ dest: 'uploads/' })
 
@@ -12,6 +12,8 @@ async function publicRoutes(instance, options){
 
     
     instance.post('/career-applications', handleCareerApplication)
+
+    instance.post('/contact-us', handleContactUs)
 
     
 }

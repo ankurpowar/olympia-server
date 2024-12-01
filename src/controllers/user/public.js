@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { generateRandomString } from '../../utils/globals.js';
 import applicationModel from '../../mongoose-models/applications.js';
+import contactUsModel from '../../mongoose-models/contact-us.js';
 
 const require = createRequire(import.meta.url);
 const path = require('node:path')
@@ -89,6 +90,77 @@ async function handleCareerApplication(request, reply){
                     </div>` // html body
             });
 
+            
+
+
+            reply.send()
+}
+
+async function handleContactUs(request, reply){
+    let { firstName, lastName, phoneNumber, email, message } = request.body
+
+            await contactUsModel.create({firstName, lastName, phoneNumber, email, message})
+
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.zoho.com',
+                port: 465,
+                secure: true, // true for 465, false for other ports
+                auth: {
+                    user: 'ankurpowar94@zoho.com', // generated ethereal user
+                    pass: 'Zoho@123!@#', // generated ethereal password
+                },
+                tls: {
+                    // do not fail on invalid certs
+                    rejectUnauthorized: false,
+                },
+            });
+            
+            try {
+                let info = await transporter.sendMail({
+                    user: 'ankurpowar94@zoho.com', // generated ethereal user
+                    from: 'ankurpowar94@zoho.com', // sender address
+                    to: 'ankur_powar@yahoo.co.in', // list of receivers
+                    subject: 'Contact Us - website', // Subject line
+                    //text: "Your Credit Card details might be vulerable...call 911", // plain text body
+    
+                    
+    
+                    html:
+                        `<style>
+                        .main-content{
+                          margin-left:20%,
+                          width:60%
+                        }
+                        @media screen and (max-width: 500px){
+                          .main-content{
+                            margin-left:5%,
+                            width:90%
+                          }
+                        }
+                      </style>
+                        <div class="main-content" style="margin-left:5%; width:90%">
+                            <h3>A User Submitted Careers form with following Details</h3>
+                        </div>
+                        <div class="main-content" style="margin-left:5%; width:90%">
+                        
+                        
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>First Name: </strong>${firstName}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Last Name: </strong>${lastName}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Phone Number: </strong>${phoneNumber}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Email: </strong>${email}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Message: </strong>${message}</p>
+                            
+                            
+                        </div>
+                        <div style="margin-left: 20%; width: 60%;">
+                            <p style="display: inline-block ;font-size: 0.8rem; margin-top: 5rem; padding: 0.5rem; background-color: rgb(255, 255, 111);">Do not reply to this Email. This is auto-generated mail.</p>
+                        </div>` // html body
+                });
+            } catch (error) {
+                console.log(error)
+            }
+            
+
 
             reply.send()
 }
@@ -97,4 +169,4 @@ async function testServer(request,reply){
     return reply.code(200).send({message:'success'})
 }
 
-export {testServer, handleCareerApplication}
+export {testServer, handleCareerApplication, handleContactUs}
