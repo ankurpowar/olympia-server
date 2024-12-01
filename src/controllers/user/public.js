@@ -45,7 +45,7 @@ async function handleCareerApplication(request, reply){
             let info = await transporter.sendMail({
                 user: 'ankurpowar94@zoho.com', // generated ethereal user
                 from: 'ankurpowar94@zoho.com', // sender address
-                to: 'ankur_powar@yahoo.co.in', // list of receivers
+                to: email, // list of receivers
                 subject: 'Careers Application - website', // Subject line
                 //text: "Your Credit Card details might be vulerable...call 911", // plain text body
 
@@ -89,7 +89,6 @@ async function handleCareerApplication(request, reply){
                         <p style="display: inline-block ;font-size: 0.8rem; margin-top: 5rem; padding: 0.5rem; background-color: rgb(255, 255, 111);">Do not reply to this Email. This is auto-generated mail.</p>
                     </div>` // html body
             });
-
             
 
 
@@ -119,7 +118,7 @@ async function handleContactUs(request, reply){
                 let info = await transporter.sendMail({
                     user: 'ankurpowar94@zoho.com', // generated ethereal user
                     from: 'ankurpowar94@zoho.com', // sender address
-                    to: 'ankur_powar@yahoo.co.in', // list of receivers
+                    to: email, // list of receivers
                     subject: 'Contact Us - website', // Subject line
                     //text: "Your Credit Card details might be vulerable...call 911", // plain text body
     
