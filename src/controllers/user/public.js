@@ -41,58 +41,63 @@ async function handleCareerApplication(request, reply){
                     rejectUnauthorized: false,
                 },
             });
-
-            let info = await transporter.sendMail({
-                user: 'ankurpowar94@zoho.com', // generated ethereal user
-                from: 'ankurpowar94@zoho.com', // sender address
-                to: email, // list of receivers
-                subject: 'Careers Application - website', // Subject line
-                //text: "Your Credit Card details might be vulerable...call 911", // plain text body
-
-                attachments: [
-                    {
-                        filename: filename,
-                        content: request.body.resume
-                    }
-
-                ],
-
-                html:
-                    `<style>
-                    .main-content{
-                      margin-left:20%,
-                      width:60%
-                    }
-                    @media screen and (max-width: 500px){
-                      .main-content{
-                        margin-left:5%,
-                        width:90%
-                      }
-                    }
-                  </style>
-                    <div class="main-content" style="margin-left:5%; width:90%">
-                        <h3>A User Submitted Careers form with following Details</h3>
-                    </div>
-                    <div class="main-content" style="margin-left:5%; width:90%">
-                    <p style="padding: 0.5rem 0; margin: 0;"><strong>Job Title: </strong>${jobTitle}</p>
-                    <p style="padding: 0.5rem 0; margin: 0;"><strong>Experience requirement: </strong>${requiredExperience}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>First Name: </strong>${firstName}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Last Name: </strong>${lastName}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Phone Number: </strong>${phoneNumber}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Email: </strong>${email}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Date Of Birth: </strong>${dateOfBirth}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Education: </strong>${education}</p>
-                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Experience: </strong>${experience}</p>
-                        
-                    </div>
-                    <div style="margin-left: 20%; width: 60%;">
-                        <p style="display: inline-block ;font-size: 0.8rem; margin-top: 5rem; padding: 0.5rem; background-color: rgb(255, 255, 111);">Do not reply to this Email. This is auto-generated mail.</p>
-                    </div>` // html body
-            });
+            
+            try {
+                let info = await transporter.sendMail({
+                    user: 'ankurpowar94@zoho.com', // generated ethereal user
+                    from: 'ankurpowar94@zoho.com', // sender address
+                    to: 'info@olympianationalschool.com', // list of receivers
+                    subject: 'Careers Application - website', // Subject line
+                    //text: "Your Credit Card details might be vulerable...call 911", // plain text body
+    
+                    attachments: [
+                        {
+                            filename: filename,
+                            content: request.body.resume
+                        }
+    
+                    ],
+    
+                    html:
+                        `<style>
+                        .main-content{
+                          margin-left:20%,
+                          width:60%
+                        }
+                        @media screen and (max-width: 500px){
+                          .main-content{
+                            margin-left:5%,
+                            width:90%
+                          }
+                        }
+                      </style>
+                        <div class="main-content" style="margin-left:5%; width:90%">
+                            <h3>A User Submitted Careers form with following Details</h3>
+                        </div>
+                        <div class="main-content" style="margin-left:5%; width:90%">
+                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Job Title: </strong>${jobTitle}</p>
+                        <p style="padding: 0.5rem 0; margin: 0;"><strong>Experience requirement: </strong>${requiredExperience}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>First Name: </strong>${firstName}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Last Name: </strong>${lastName}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Phone Number: </strong>${phoneNumber}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Email: </strong>${email}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Date Of Birth: </strong>${dateOfBirth}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Education: </strong>${education}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Experience: </strong>${experience}</p>
+                            
+                        </div>
+                        <div style="margin-left: 20%; width: 60%;">
+                            <p style="display: inline-block ;font-size: 0.8rem; margin-top: 5rem; padding: 0.5rem; background-color: rgb(255, 255, 111);">Do not reply to this Email. This is auto-generated mail.</p>
+                        </div>` // html body
+                });
+            }catch(error){
+                return reply.status(500).send({message:error})
+            }
+            
             
 
 
-            reply.send()
+            return reply.send()
 }
 
 async function handleContactUs(request, reply){
@@ -118,7 +123,7 @@ async function handleContactUs(request, reply){
                 let info = await transporter.sendMail({
                     user: 'ankurpowar94@zoho.com', // generated ethereal user
                     from: 'ankurpowar94@zoho.com', // sender address
-                    to: email, // list of receivers
+                    to: 'info@olympianationalschool.com', // list of receivers
                     subject: 'Contact Us - website', // Subject line
                     //text: "Your Credit Card details might be vulerable...call 911", // plain text body
     
@@ -156,12 +161,12 @@ async function handleContactUs(request, reply){
                         </div>` // html body
                 });
             } catch (error) {
-                console.log(error)
-            }
+                return reply.code(500).send({message: error})
+            } 
             
 
 
-            reply.send()
+            return reply.send()
 }
 
 async function testServer(request,reply){
