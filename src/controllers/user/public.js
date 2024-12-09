@@ -29,12 +29,12 @@ async function handleCareerApplication(request, reply){
             await fs.writeFileSync(savePath, request.body.resume);
 
             const transporter = nodemailer.createTransport({
-                host: 'smtp.zoho.com',
+                host: 'smtpout.secureserver.net',
                 port: 465,
                 secure: true, // true for 465, false for other ports
                 auth: {
-                    user: 'ankurpowar94@zoho.com', // generated ethereal user
-                    pass: 'Zoho@123!@#', // generated ethereal password
+                    user: 'hr@olympianationalschool.com', // generated ethereal user
+                    pass: 'Olympia@0024', // generated ethereal password
                 },
                 tls: {
                     // do not fail on invalid certs
@@ -44,9 +44,9 @@ async function handleCareerApplication(request, reply){
             
             try {
                 let info = await transporter.sendMail({
-                    user: 'ankurpowar94@zoho.com', // generated ethereal user
-                    from: 'ankurpowar94@zoho.com', // sender address
-                    to: 'info@olympianationalschool.com', // list of receivers
+                    user: 'hr@olympianationalschool.com', // generated ethereal user
+                    from: 'hr@olympianationalschool.com', // sender address
+                    to: 'hr@olympianationalschool.com', // list of receivers
                     subject: 'Careers Application - website', // Subject line
                     //text: "Your Credit Card details might be vulerable...call 911", // plain text body
     
@@ -81,7 +81,7 @@ async function handleCareerApplication(request, reply){
                             <p style="padding: 0.5rem 0; margin: 0;"><strong>Last Name: </strong>${lastName}</p>
                             <p style="padding: 0.5rem 0; margin: 0;"><strong>Phone Number: </strong>${phoneNumber}</p>
                             <p style="padding: 0.5rem 0; margin: 0;"><strong>Email: </strong>${email}</p>
-                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Date Of Birth: </strong>${dateOfBirth}</p>
+                            <p style="padding: 0.5rem 0; margin: 0;"><strong>Date Of Birth: </strong>${new Date(dateOfBirth).toDateString()}</p>
                             <p style="padding: 0.5rem 0; margin: 0;"><strong>Education: </strong>${education}</p>
                             <p style="padding: 0.5rem 0; margin: 0;"><strong>Experience: </strong>${experience}</p>
                             
@@ -106,12 +106,12 @@ async function handleContactUs(request, reply){
             await contactUsModel.create({firstName, lastName, phoneNumber, email, message})
 
             const transporter = nodemailer.createTransport({
-                host: 'smtp.zoho.com',
+                host: 'smtpout.secureserver.net',
                 port: 465,
                 secure: true, // true for 465, false for other ports
                 auth: {
-                    user: 'ankurpowar94@zoho.com', // generated ethereal user
-                    pass: 'Zoho@123!@#', // generated ethereal password
+                    user: 'hr@olympianationalschool.com', // generated ethereal user
+                    pass: 'Olympia@0024', // generated ethereal password
                 },
                 tls: {
                     // do not fail on invalid certs
@@ -121,9 +121,9 @@ async function handleContactUs(request, reply){
             
             try {
                 let info = await transporter.sendMail({
-                    user: 'ankurpowar94@zoho.com', // generated ethereal user
-                    from: 'ankurpowar94@zoho.com', // sender address
-                    to: 'info@olympianationalschool.com', // list of receivers
+                    user: 'hr@olympianationalschool.com', // generated ethereal user
+                    from: 'hr@olympianationalschool.com', // sender address
+                    to: 'hr@olympianationalschool.com', // list of receivers
                     subject: 'Contact Us - website', // Subject line
                     //text: "Your Credit Card details might be vulerable...call 911", // plain text body
     
